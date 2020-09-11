@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 
 import '@/icons' // icon
+import '@/permission' // permission control
 
 Vue.config.productionTip = false
 

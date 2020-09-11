@@ -1,29 +1,57 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Router from 'vue-router'
 
-Vue.use(VueRouter)
+import Layout from '@/layout'
 
-  const routes = [
+Vue.use(Router)
+
+const constantRoutes = [
+  {
+    path: '/404',
+    component: () => import(/* webpackChunkName: "page404" */ '@/views/404'),
+    hidden: true
+  },
+
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Home'),
+      meta: { title: '首页', icon: 'home', affix: true }
+    }]
   },
+
   {
     path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: Layout,
+    children: [{
+      path: 'about-page',
+      name: 'About',
+      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+      meta: { title: '关于', icon: 'home', affix: true }
+    }]
+    
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+export const asyncRoutes = []
+
+const createRouter = () => new Router({
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRoutes
 })
 
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
 export default router
+
