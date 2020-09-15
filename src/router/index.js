@@ -5,7 +5,7 @@ import Layout from '@/layout'
 
 Vue.use(Router)
 
-const constantRoutes = [
+export const constantRoutes = [
   {
     path: '/login',
     component: () => import(/* webpackChunkName: "login" */ '@/views/login/index'),

@@ -6,8 +6,8 @@ function resolve(dir) {
 }
 
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
+  'transpileDependencies': [
+    'vuetify'
   ],
   chainWebpack(config) {
     // set svg-sprite-loader

@@ -4,7 +4,7 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: '',
+    avatar: ''
   }
 }
 
@@ -34,18 +34,21 @@ const actions = {
     // const { username, password } = userInfo
     return new Promise((resolve) => {
       // login({ username: username.trim(), password: password }).then(response => {
-        // const { data } = response
-        commit('SET_TOKEN', 'admin')
-        setToken('admin')
-        resolve()
+      // const { data } = response
+      commit('SET_TOKEN', 'adminToken123123123')
+      setToken('adminToken123123123')
+      resolve()
       // }).catch(error => {
       //   reject(error)
       // })
     })
   },
 
-  getInfo() {
-
+  getInfo({ commit }) {
+    return new Promise(resolve => {
+      commit('SET_NAME', 'admin')
+      resolve()
+    })
   },
 
   // remove token
@@ -56,7 +59,7 @@ const actions = {
       removeToken()
       resolve()
     })
-  },
+  }
 }
 
 export default {

@@ -1,102 +1,91 @@
 <template>
-  <v-app>
-    <v-form
-      ref="form"
-      v-model="valid"
-      lazy-validation
-    >
-      <v-text-field
-        v-model="name"
-        :counter="10"
-        :rules="nameRules"
-        label="Name"
-        required
-      />
-
-      <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        required
-      />
-
-      <v-select
-        v-model="select"
-        :items="items"
-        :rules="[v => !!v || 'Item is required']"
-        label="Item"
-        required
-      />
-
-      <v-checkbox
-        v-model="checkbox"
-        :rules="[v => !!v || 'You must agree to continue!']"
-        label="Do you agree?"
-        required
-      />
-
-      <v-btn
-        :disabled="!valid"
-        color="success"
-        class="mr-4"
-        @click="validate"
+  <v-app class="login">
+    <div class="login-box">
+      <v-sheet
+        :width="280"
+        :height="250"
+        elevation="4"
+        class="login-wrap"
       >
-        Validate
-      </v-btn>
+        <v-form
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
+          <v-text-field
+            v-model="username"
+            :counter="10"
+            :rules="usernameRules"
+            label="账号"
+            required
+          />
 
-      <v-btn
-        color="error"
-        class="mr-4"
-        @click="reset"
-      >
-        Reset Form
-      </v-btn>
+          <v-text-field
+            v-model="password"
+            :rules="passwordRules"
+            label="密码"
+            required
+          />
 
-      <v-btn
-        color="warning"
-        @click="resetValidation"
-      >
-        Reset Validation
-      </v-btn>
-    </v-form>
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            block
+            @click="validate"
+          >
+            登 录
+          </v-btn>
+        </v-form>
+      </v-sheet>
+    </div>
   </v-app>
-
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
   data: () => ({
     valid: true,
-    name: '',
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+    username: '',
+    usernameRules: [
+      v => !!v || '请输入账号'
     ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-    ],
-    select: null,
-    items: [
-      'Item 1',
-      'Item 2',
-      'Item 3',
-      'Item 4'
-    ],
-    checkbox: false
+    password: '',
+    passwordRules: [
+      v => !!v || '请输入密码',
+      v => v.length >= 6 || '最少6位'
+    ]
   }),
   methods: {
-    validate() {
-      this.$refs.form.validate()
-    },
-    reset() {
-      this.$refs.form.reset()
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation()
+    ...mapActions({
+      login: 'user/login'
+    }),
+
+    async validate() {
+      if (this.$refs.form.validate()) {
+        await this.login()
+        this.$router.push('/')
+      }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.login {
+  .login-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .login-wrap {
+      padding: 20px;
+    }
+  }
+}
+</style>
