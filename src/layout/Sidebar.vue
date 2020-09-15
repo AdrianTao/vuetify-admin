@@ -26,11 +26,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Sidebar',
   data() {
     return {
-      drawer: null
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'permission_routes',
+      'sidebar'
+    ]),
+
+    drawer() {
+      return !this.sidebar.opened
     }
   }
 }
