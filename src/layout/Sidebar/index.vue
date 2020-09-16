@@ -1,10 +1,16 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    :value="drawer"
     app
     clipped
   >
     <v-list dense>
+      <sidebar-item
+        v-for="route in permission_routes"
+        :key="route.path"
+        :item="route"
+      />
+
       <v-list-item link>
         <v-list-item-action>
           <v-icon>mdi-view-dashboard</v-icon>
@@ -27,12 +33,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import SidebarItem from './SidebarItem'
 
 export default {
   name: 'Sidebar',
-  data() {
-    return {
-    }
+  components: {
+    SidebarItem
   },
   computed: {
     ...mapGetters([
@@ -41,7 +47,7 @@ export default {
     ]),
 
     drawer() {
-      return !this.sidebar.opened
+      return this.sidebar.opened
     }
   }
 }
