@@ -26,20 +26,29 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Home'),
-      meta: { title: '首页', icon: 'home', affix: true }
+      meta: { title: '首页', icon: 'mdi-view-dashboard', affix: true }
     }]
   },
 
   {
     path: '/about',
+    name: 'About',
     component: Layout,
-    children: [{
-      path: 'about-page',
-      name: 'About',
-      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-      meta: { title: '关于', icon: 'home', affix: true }
-    }]
-
+    meta: { title: '关于', icon: 'mdi-cog' },
+    children: [
+      {
+        path: 'about-us',
+        name: 'AboutUs',
+        component: () => import(/* webpackChunkName: "about" */ '../views/about/about-us.vue'),
+        meta: { title: '关于我们', icon: 'mdi-cog' }
+      },
+      {
+        path: 'about-you',
+        name: 'AboutYou',
+        component: () => import(/* webpackChunkName: "about" */ '../views/about/about-you.vue'),
+        meta: { title: '关于你们', icon: 'mdi-cog' }
+      }
+    ]
   }
 ]
 
