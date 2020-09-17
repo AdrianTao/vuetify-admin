@@ -47,6 +47,25 @@ export const constantRoutes = [
         name: 'AboutYou',
         component: () => import(/* webpackChunkName: "about" */ '../views/about/about-you.vue'),
         meta: { title: '关于你们', icon: 'mdi-cog' }
+      },
+      {
+        path: 'about-they',
+        name: 'AboutThey',
+        meta: { title: '关于他们', icon: 'mdi-cog' },
+        children: [
+          {
+            path: 'they1',
+            name: 'they1',
+            component: () => import(/* webpackChunkName: "about" */ '../views/about/about-they/they2'),
+            meta: { title: '他们1', icon: 'mdi-cog' }
+          },
+          {
+            path: 'they2',
+            name: 'they2',
+            component: () => import(/* webpackChunkName: "about" */ '../views/about/about-they/they2'),
+            meta: { title: '他们2', icon: 'mdi-cog' }
+          }
+        ]
       }
     ]
   }

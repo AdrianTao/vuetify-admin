@@ -5,7 +5,7 @@
       link
     >
       <v-list-item-action>
-        <v-icon>
+        <v-icon v-if="!isSubmenu">
           {{ onlyOneChild.meta.icon||(item.meta&&item.meta.icon) }}
         </v-icon>
       </v-list-item-action>
@@ -17,7 +17,7 @@
     </v-list-item>
 
     <v-list-group
-      v-else
+      v-else-if="!isSubmenu"
       :prepend-icon="item.meta.icon"
       value="true"
     >
@@ -29,6 +29,26 @@
         v-for="child in item.children"
         :key="child.path"
         :item="child"
+        :is-submenu="true"
+      />
+    </v-list-group>
+
+    <v-list-group
+      v-else
+      sub-group
+      no-action
+    >
+      <template v-slot:activator>
+        <v-list-item-content>
+          <v-list-item-title>{{ item.meta.title }}</v-list-item-title>
+        </v-list-item-content>
+      </template>
+
+      <sidebar-item
+        v-for="child in item.children"
+        :key="child.path"
+        :item="child"
+        :is-submenu="true"
       />
     </v-list-group>
   </div>
@@ -41,6 +61,11 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+
+    isSubmenu: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
