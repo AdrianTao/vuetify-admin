@@ -2,7 +2,8 @@
   <div v-if="!item.hidden">
     <v-list-item
       v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow"
-      link
+      router
+      :to="resolvePath(onlyOneChild.path)"
     >
       <v-list-item-action>
         <v-icon v-if="!isSubmenu">
@@ -29,6 +30,7 @@
         v-for="child in item.children"
         :key="child.path"
         :item="child"
+        :base-path="resolvePath(child.path)"
         :is-submenu="true"
       />
     </v-list-group>
@@ -48,6 +50,7 @@
         v-for="child in item.children"
         :key="child.path"
         :item="child"
+        :base-path="resolvePath(child.path)"
         :is-submenu="true"
       />
     </v-list-group>
@@ -55,12 +58,20 @@
 </template>
 
 <script>
+import path from 'path'
+import { isExternal } from '@/utils/validate'
+
 export default {
   name: 'SidebarItem',
   props: {
     item: {
       type: Object,
       required: true
+    },
+
+    basePath: {
+      type: String,
+      default: ''
     },
 
     isSubmenu: {
@@ -98,6 +109,16 @@ export default {
       }
 
       return false
+    },
+
+    resolvePath(routePath) {
+      if (isExternal(routePath)) {
+        return routePath
+      }
+      if (isExternal(this.basePath)) {
+        return this.basePath
+      }
+      return path.resolve(this.basePath, routePath)
     }
   }
 }

@@ -2,6 +2,7 @@
   <v-app-bar
     app
     clipped-left
+    height="56"
   >
     <v-app-bar-nav-icon @click.stop="toggleSideBar" />
     <v-toolbar-title>Vuetify Admin</v-toolbar-title>
@@ -33,6 +34,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    :value="drawer"
+    :mini-variant="drawer"
     app
     clipped
   >
@@ -9,6 +9,7 @@
         v-for="route in permission_routes"
         :key="route.path"
         :item="route"
+        :base-path="route.path"
       />
     </v-list>
   </v-navigation-drawer>
