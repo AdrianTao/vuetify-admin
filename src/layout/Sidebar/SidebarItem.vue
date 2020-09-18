@@ -4,6 +4,7 @@
       v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow"
       router
       :to="resolvePath(onlyOneChild.path)"
+      color="primary"
     >
       <v-list-item-action>
         <v-icon v-if="!isSubmenu">

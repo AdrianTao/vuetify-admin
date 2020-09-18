@@ -4,7 +4,7 @@
     app
     clipped
   >
-    <v-list>
+    <v-list nav dense>
       <sidebar-item
         v-for="route in permission_routes"
         :key="route.path"
