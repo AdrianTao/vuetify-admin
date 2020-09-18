@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '媒婆湾管理平台',
+  title: 'vuetify-admin',
 
   /**
    * @type {boolean} true | false

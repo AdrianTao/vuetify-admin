@@ -1,8 +1,8 @@
-const title = 'vuetify-admin'
+const setting = require('../settings.js')
 
 export default function getPageTitle(pageTitle) {
   if (pageTitle) {
-    return `${pageTitle} - ${title}`
+    return `${pageTitle} - ${setting.title}`
   }
-  return `${title}`
+  return `${setting.title}`
 }
