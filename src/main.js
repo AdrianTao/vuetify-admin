@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false
 

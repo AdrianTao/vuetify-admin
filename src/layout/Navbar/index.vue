@@ -3,9 +3,15 @@
     app
     clipped-left
     height="56"
+    class="navbar"
+    :fixed="headerFixed"
   >
     <v-app-bar-nav-icon @click.stop="toggleSideBar" />
     <v-toolbar-title v-if="showLogo">Vuetify Admin</v-toolbar-title>
+
+    <v-spacer />
+
+    <right-menu />
 
     <template v-if="showTagsView" v-slot:extension>
       <tags-view />
@@ -14,12 +20,15 @@
 </template>
 
 <script>
+import setting from '@/settings.js'
+import RightMenu from './RightMenu'
 import TagsView from '../TagsView'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Navbar',
   components: {
+    RightMenu,
     TagsView
   },
   data() {
@@ -37,7 +46,11 @@ export default {
       'sidebar',
       'avatar',
       'device'
-    ])
+    ]),
+
+    headerFixed() {
+      return setting.fixedHeader
+    }
   },
   methods: {
     toggleSideBar() {
