@@ -9,6 +9,8 @@
     <v-app-bar-nav-icon @click.stop="toggleSideBar" />
     <v-toolbar-title v-if="showLogo">Vuetify Admin</v-toolbar-title>
 
+    <breadcrumbs />
+
     <v-spacer />
 
     <right-menu />
@@ -21,6 +23,7 @@
 
 <script>
 import setting from '@/settings.js'
+import Breadcrumbs from '../Breadcrumbs'
 import RightMenu from './RightMenu'
 import TagsView from '../TagsView'
 import { mapState, mapGetters } from 'vuex'
@@ -28,6 +31,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
   components: {
+    Breadcrumbs,
     RightMenu,
     TagsView
   },

@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import '@/styles/index.scss'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import dialog from './plugins/dialog/' // 封装的dialog组件
